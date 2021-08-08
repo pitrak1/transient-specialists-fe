@@ -1,13 +1,15 @@
 {
-  "name": "learn-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "transient-specialists-fe",
+  "version": "1.0.0",
+  "description": "The NextJS frontend for Transient Specialists",
   "scripts": {
     "dev": "npm run build && next dev -p 5000",
     "build": "next build",
     "start": "npm run build && next start -p $PORT",
     "heroku-postbuild": "npm run build"
   },
+  "author": "Nick Pitrak",
+  "license": "ISC",
   "dependencies": {
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
@@ -18,5 +20,18 @@
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pitrak1/transient-specialists-fe.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "nextjs"
+  ],
+  "bugs": {
+    "url": "https://github.com/pitrak1/transient-specialists-fe/issues"
+  },
+  "homepage": "https://github.com/pitrak1/transient-specialists-fe#readme"
 }
