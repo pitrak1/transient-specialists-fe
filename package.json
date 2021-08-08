@@ -4,11 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "npm run build && next dev -p 5000",
-    "dev:remote": "npm run build && heroku local",
     "build": "next build",
-    "start": "npm run build && next start -p 5000"
+    "start": "npm run build && next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "axios": "^0.21.1",
+    "framer-motion": "^4.1.17",
+    "js-cookie": "^3.0.0",
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
