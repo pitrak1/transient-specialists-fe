@@ -5,8 +5,8 @@ import Router from 'next/router'
 import Cookies from 'js-cookie'
 import Header from '../src/components/header'
 
-export default function Index() {
-  const [equipment, setEquipment] = React.useState([])
+export default function Oems() {
+  const [oems, setOems] = React.useState([])
 
   useEffect(() => {
     if (!Cookies.get('AuthToken')) {
@@ -14,8 +14,7 @@ export default function Index() {
     }
 
     const success = (response) => {
-      console.log(response.data)
-      setEquipment(response.data)
+      setOems(response.data)
     }
     const failure = (error) => {
       console.log(error)
@@ -23,33 +22,18 @@ export default function Index() {
     equipmentRequest(success, failure)
   }, [])
 
-  const equipmentRows = equipment.map(e => (
-    <Tr key={e.serial_number}>
-      <Td>{e.serial_number}</Td>
-      <Td>{e.oem}</Td>
-      <Td>{e.model}</Td>
-      <Td>{e.type}</Td>
-      <Td>{e.notes}</Td>
-      <Td>Details</Td>
-    </Tr>
-  ))
-
   return (
     <div>
-      <Header title='Equipment' />
+      <Header title='OEMs' />
       <Table>
         <Thead>
           <Tr>
             <Th>Serial Number</Th>
-            <Th>OEM</Th>
-            <Th>Model</Th>
-            <Th>Type</Th>
             <Th>Notes</Th>
-            <Th className='tableLastHeading'></Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
-          {equipmentRows}
         </Tbody>
       </Table>
     </div>
