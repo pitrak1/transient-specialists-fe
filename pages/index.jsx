@@ -11,16 +11,16 @@ export default function Index() {
   useEffect(() => {
     if (!Cookies.get('AuthToken')) {
       Router.push('/login')
+    } else {
+      const success = (response) => {
+        console.log(response.data)
+        setEquipment(response.data)
+      }
+      const failure = (error) => {
+        console.log(error)
+      }
+      equipmentRequest(success, failure)
     }
-
-    const success = (response) => {
-      console.log(response.data)
-      setEquipment(response.data)
-    }
-    const failure = (error) => {
-      console.log(error)
-    }
-    equipmentRequest(success, failure)
   }, [])
 
   const equipmentRows = equipment.map(e => (
@@ -30,6 +30,11 @@ export default function Index() {
       <Td>{e.model}</Td>
       <Td>{e.type}</Td>
       <Td>{e.notes}</Td>
+      <Td>{e.event_status}</Td>
+      <Td>{e.event_job_number}</Td>
+      <Td>{e.event_company_notes}</Td>
+      <Td>{e.event_start_date}</Td>
+      <Td>{e.event_end_date}</Td>
       <Td>Details</Td>
     </Tr>
   ))
@@ -45,6 +50,11 @@ export default function Index() {
             <Th>Model</Th>
             <Th>Type</Th>
             <Th>Notes</Th>
+            <Th>Status</Th>
+            <Th>Job Number</Th>
+            <Th>Company Notes</Th>
+            <Th>Start Date</Th>
+            <Th>End Date</Th>
             <Th className='tableLastHeading'></Th>
           </Tr>
         </Thead>

@@ -18,7 +18,7 @@ export default function NavBar({ title }) {
           <a className='navBarLink'>OEMs</a>
         </Link>
       </Flex>
-      <Heading>{title}</Heading>
+      <Heading className='headerTitle'>{title}</Heading>
     </div>
   )
 }
