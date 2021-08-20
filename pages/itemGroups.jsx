@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Table, Thead, Tbody, Tr, Td, Th } from '@chakra-ui/react'
-import { oemsRequest } from '../src/externalRequests.jsx'
+import { itemGroupsRequest } from '../src/externalRequests.jsx'
 import Router from 'next/router'
 import Cookies from 'js-cookie'
 import { NavBar } from '../src/components/navBar'
 
-export default function Oems() {
-  const [oems, setOems] = React.useState([])
+export default function ItemGroups() {
+  const [itemGroups, setItemGroups] = React.useState([])
 
   useEffect(() => {
     if (!Cookies.get('AuthToken')) {
@@ -14,40 +14,34 @@ export default function Oems() {
     } else {
       const success = (response) => {
         console.log(response.data)
-        setOems(response.data)
+        setItemGroups(response.data)
       }
       const failure = (error) => {
         console.log(error)
       }
-      oemsRequest(success, failure)
+      itemGroupsRequest(success, failure)
     }
   }, [])
 
-  const oemsRows = oems.map(o => (
-    <Tr key={o.id}>
-      <Td>{o.name}</Td>
-      <Td>Equipment</Td>
-      <Td>Models</Td>
-      <Td>Edit</Td>
-      <Td>Delete</Td>
+  const itemGroupsRows = itemGroups.map(i => (
+    <Tr key={i.id}>
+      <Td>{i.name}</Td>
+      <Td>Details</Td>
     </Tr>
   ))
 
   return (
     <div>
-      <NavBar title='OEMs' />
+      <NavBar title='Item Groups' />
       <Table>
         <Thead>
           <Tr>
             <Th>Name</Th>
             <Th className='tableButtonHeading'></Th>
-            <Th className='tableButtonHeading'></Th>
-            <Th className='tableButtonHeading'></Th>
-            <Th className='tableButtonHeading'></Th>
           </Tr>
         </Thead>
         <Tbody>
-          {oemsRows}
+          {itemGroupsRows}
         </Tbody>
       </Table>
     </div>

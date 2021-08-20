@@ -5,7 +5,7 @@ const theme = extendTheme({
     global: {
       '.navBar': { backgroundColor: 'royalblue', padding: 4, color: 'white' },
       '.navBarLink': { paddingLeft: 4 },
-      '.tableLastHeading': { width: '1px' },
+      '.tableButtonHeading': { width: '1px' },
       '.headerTitle': { padding: 2 }
     },
   },

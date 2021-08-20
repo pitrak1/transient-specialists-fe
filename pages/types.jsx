@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Table, Thead, Tbody, Tr, Td, Th } from '@chakra-ui/react'
-import { oemsRequest } from '../src/externalRequests.jsx'
+import { typesRequest } from '../src/externalRequests.jsx'
 import Router from 'next/router'
 import Cookies from 'js-cookie'
 import { NavBar } from '../src/components/navBar'
 
-export default function Oems() {
-  const [oems, setOems] = React.useState([])
+export default function Types() {
+  const [types, setTypes] = React.useState([])
 
   useEffect(() => {
     if (!Cookies.get('AuthToken')) {
@@ -14,20 +14,19 @@ export default function Oems() {
     } else {
       const success = (response) => {
         console.log(response.data)
-        setOems(response.data)
+        setTypes(response.data)
       }
       const failure = (error) => {
         console.log(error)
       }
-      oemsRequest(success, failure)
+      typesRequest(success, failure)
     }
   }, [])
 
-  const oemsRows = oems.map(o => (
-    <Tr key={o.id}>
-      <Td>{o.name}</Td>
+  const typesRows = types.map(t => (
+    <Tr key={t.id}>
+      <Td>{t.name}</Td>
       <Td>Equipment</Td>
-      <Td>Models</Td>
       <Td>Edit</Td>
       <Td>Delete</Td>
     </Tr>
@@ -35,7 +34,7 @@ export default function Oems() {
 
   return (
     <div>
-      <NavBar title='OEMs' />
+      <NavBar title='Types' />
       <Table>
         <Thead>
           <Tr>
@@ -43,11 +42,10 @@ export default function Oems() {
             <Th className='tableButtonHeading'></Th>
             <Th className='tableButtonHeading'></Th>
             <Th className='tableButtonHeading'></Th>
-            <Th className='tableButtonHeading'></Th>
           </Tr>
         </Thead>
         <Tbody>
-          {oemsRows}
+          {typesRows}
         </Tbody>
       </Table>
     </div>

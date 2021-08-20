@@ -3,7 +3,8 @@ import { Table, Thead, Tbody, Tr, Td, Th } from '@chakra-ui/react'
 import { equipmentRequest } from '../src/externalRequests.jsx'
 import Router from 'next/router'
 import Cookies from 'js-cookie'
-import Header from '../src/components/header'
+import { NavBar } from '../src/components/navBar'
+import { TableHeader } from '../src/components/tableHeader'
 
 export default function Index() {
   const [equipment, setEquipment] = React.useState([])
@@ -41,11 +42,11 @@ export default function Index() {
 
   return (
     <div>
-      <Header title='Equipment' />
+      <NavBar title='Equipment' />
       <Table>
         <Thead>
           <Tr>
-            <Th>Serial Number</Th>
+            <TableHeader sortable={true} sortKey='serialNumber' currentSortKey='serialNumber' currentSortDirection='ASC'>Serial Number</TableHeader>
             <Th>OEM</Th>
             <Th>Model</Th>
             <Th>Type</Th>
@@ -55,7 +56,7 @@ export default function Index() {
             <Th>Company Notes</Th>
             <Th>Start Date</Th>
             <Th>End Date</Th>
-            <Th className='tableLastHeading'></Th>
+            <Th className='tableButtonHeading'></Th>
           </Tr>
         </Thead>
         <Tbody>

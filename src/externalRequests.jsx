@@ -13,3 +13,39 @@ export const equipmentRequest = (success, failure) => {
   		withCredentials: true
   	}).then(success).catch(failure)
 }
+
+export const oemsRequest = (success, failure) => {
+  	return axios({ 
+  		method: 'get',
+  		url: `${process.env.NEXT_PUBLIC_API_URL}/oems`,
+  		headers: { Authorization: `${Cookies.get('AuthToken')}`},
+  		withCredentials: true
+  	}).then(success).catch(failure)
+}
+
+export const modelsRequest = (success, failure) => {
+  	return axios({ 
+  		method: 'get',
+  		url: `${process.env.NEXT_PUBLIC_API_URL}/models`,
+  		headers: { Authorization: `${Cookies.get('AuthToken')}`},
+  		withCredentials: true
+  	}).then(success).catch(failure)
+}
+
+export const typesRequest = (success, failure) => {
+  	return axios({ 
+  		method: 'get',
+  		url: `${process.env.NEXT_PUBLIC_API_URL}/types`,
+  		headers: { Authorization: `${Cookies.get('AuthToken')}`},
+  		withCredentials: true
+  	}).then(success).catch(failure)
+}
+
+export const itemGroupsRequest = (success, failure) => {
+  	return axios({ 
+  		method: 'get',
+  		url: `${process.env.NEXT_PUBLIC_API_URL}/itemGroups`,
+  		headers: { Authorization: `${Cookies.get('AuthToken')}`},
+  		withCredentials: true
+  	}).then(success).catch(failure)
+}
