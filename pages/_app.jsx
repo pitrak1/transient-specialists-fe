@@ -6,7 +6,9 @@ const theme = extendTheme({
       '.navBar': { backgroundColor: 'royalblue', padding: 4, color: 'white' },
       '.navBarLink': { paddingLeft: 4 },
       '.tableButtonHeading': { width: '1px' },
-      '.headerTitle': { padding: 2 }
+      '.headerTitle': { padding: 2 },
+      '.paginationText': { padding: 3 },
+      '.paginationButton': { padding: 1 }
     },
   },
 })

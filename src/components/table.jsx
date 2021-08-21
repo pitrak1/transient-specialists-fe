@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { Box, Spacer, Flex, Heading, Button } from '@chakra-ui/react'
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ChevronUpIcon, ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { Table, Thead, Tbody, Tr, Td, Th } from '@chakra-ui/react'
 import { createEnum, displayDateFromISO } from '../utils.jsx'
 
@@ -11,6 +11,7 @@ export const ColumnTypes = createEnum(['Value', 'Date', 'Button'])
 export function FullTable({ headerData, rowData, startingSortKey, startingSortAscending }) {
   const [sortKey, setSortKey] = React.useState(startingSortKey)
   const [sortAscending, setSortAscending] = React.useState(startingSortAscending)
+  const [rowsPerPage, setRowsPerPage] = React.useState(25)
 
   const onTableHeaderClick = (key) => {
     if (key == sortKey) {
@@ -30,16 +31,19 @@ export function FullTable({ headerData, rowData, startingSortKey, startingSortAs
   ))
 
   return (
-    <Table>
-      <Thead>
-        <Tr>
-          {tableHeaders}
-        </Tr>
-      </Thead>
-      <Tbody>
-        {tableRows}
-      </Tbody>
-    </Table>
+    <div>
+      <Table>
+        <Thead>
+          <Tr>
+            {tableHeaders}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {tableRows}
+        </Tbody>
+      </Table>
+      <TablePagination pageNumber={0} rowsPerPage={rowsPerPage} count={tableRows.length} hasNextPage={false} hasPreviousPage={false}  />
+    </div>
   )
 }
 
@@ -93,4 +97,26 @@ export function TableCell({ cellData }) {
       </Td>
     )
   }
+}
+
+export function TablePagination({ pageNumber, rowsPerPage, count, hasNextPage, hasPreviousPage }) {
+  const start = pageNumber * rowsPerPage + 1
+  const end = pageNumber * rowsPerPage + rowsPerPage
+  return (
+    <Flex>
+      <Spacer />
+      <Box className='paginationText'>
+        Rows Per Page: 25
+      </Box>
+      <Box className='paginationText'>
+        {start}-{end} of {count}
+      </Box>
+      <Box className='paginationButton'>
+        <Button leftIcon={<ChevronLeftIcon boxSize={10} />} />
+      </Box>
+      <Box className='paginationButton'>
+        <Button leftIcon={<ChevronRightIcon boxSize={10} />} />
+      </Box>
+    </Flex>
+  )
 }
