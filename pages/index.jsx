@@ -4,7 +4,7 @@ import { equipmentRequest } from '../src/externalRequests.jsx'
 import Router from 'next/router'
 import Cookies from 'js-cookie'
 import { NavBar } from '../src/components/navBar'
-import { TableHeader } from '../src/components/tableHeader'
+import { FullTable, ColumnTypes } from '../src/components/table'
 
 export default function Index() {
   const [equipment, setEquipment] = React.useState([])
@@ -24,45 +24,51 @@ export default function Index() {
     }
   }, [])
 
-  const equipmentRows = equipment.map(e => (
-    <Tr key={e.serial_number}>
-      <Td>{e.serial_number}</Td>
-      <Td>{e.oem}</Td>
-      <Td>{e.model}</Td>
-      <Td>{e.type}</Td>
-      <Td>{e.notes}</Td>
-      <Td>{e.event_status}</Td>
-      <Td>{e.event_job_number}</Td>
-      <Td>{e.event_company_notes}</Td>
-      <Td>{e.event_start_date}</Td>
-      <Td>{e.event_end_date}</Td>
-      <Td>Details</Td>
-    </Tr>
-  ))
+
+  const headerData = [
+    { key: 'serialNumber', value: 'Serial Number', type: ColumnTypes.Value },
+    { key: 'oem', value: 'OEM', type: ColumnTypes.Value },
+    { key: 'model', value: 'Model', type: ColumnTypes.Value },
+    { key: 'type', value: 'Type', type: ColumnTypes.Value },
+    { key: 'notes', value: 'Notes', type: ColumnTypes.Value },
+    { key: 'status', value: 'Status', type: ColumnTypes.Value },
+    { key: 'jobNumber', value: 'Job Number', type: ColumnTypes.Value },
+    { key: 'companyNotes', value: 'Company/Notes', type: ColumnTypes.Value },
+    { key: 'startDate', value: 'Start Date', type: ColumnTypes.Date },
+    { key: 'endDate', value: 'End Date', type: ColumnTypes.Date },
+    { key: 'details', type: ColumnTypes.Button }
+  ]
+
+  const onDetailsClick = (id) => {
+    console.log(id)
+  }
+
+  const rowData = equipment.map(e => ({
+    key: e.serial_number,
+    data: [
+      { id: e.id, key: 'serialNumber', value: e.serial_number, type: ColumnTypes.Value },
+      { id: e.id, key: 'oem', value: e.oem, type: ColumnTypes.Value },
+      { id: e.id, key: 'model', value: e.model, type: ColumnTypes.Value },
+      { id: e.id, key: 'type', value: e.type, type: ColumnTypes.Value },
+      { id: e.id, key: 'notes', value: e.notes, type: ColumnTypes.Value },
+      { id: e.id, key: 'status', value: e.event_status, type: ColumnTypes.Value },
+      { id: e.id, key: 'jobNumber', value: e.event_job_number, type: ColumnTypes.Value },
+      { id: e.id, key: 'companyNotes', value: e.event_company_notes, type: ColumnTypes.Value },
+      { id: e.id, key: 'startDate', value: e.event_start_date, type: ColumnTypes.Date },
+      { id: e.id, key: 'endDate', value: e.event_end_date, type: ColumnTypes.Date },
+      { id: e.id, key: 'details', value: 'Details', type: ColumnTypes.Button, callback: onDetailsClick }
+    ]
+  }))
 
   return (
     <div>
       <NavBar title='Equipment' />
-      <Table>
-        <Thead>
-          <Tr>
-            <TableHeader sortable={true} sortKey='serialNumber' currentSortKey='serialNumber' currentSortDirection='ASC'>Serial Number</TableHeader>
-            <Th>OEM</Th>
-            <Th>Model</Th>
-            <Th>Type</Th>
-            <Th>Notes</Th>
-            <Th>Status</Th>
-            <Th>Job Number</Th>
-            <Th>Company Notes</Th>
-            <Th>Start Date</Th>
-            <Th>End Date</Th>
-            <Th className='tableButtonHeading'></Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {equipmentRows}
-        </Tbody>
-      </Table>
+      <FullTable
+        headerData={headerData}
+        rowData={rowData}
+        startingSortKey={'serialNumber'}
+        startingSortAscending={true}
+      />
     </div>
   )
 }
