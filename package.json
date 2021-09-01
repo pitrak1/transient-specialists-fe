@@ -6,7 +6,8 @@
     "dev": "next dev -p 5000",
     "build": "next build",
     "start": "next start -p $PORT",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "test": "mocha"
   },
   "author": "Nick Pitrak",
   "license": "ISC",
@@ -16,8 +17,11 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.1",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "framer-motion": "^4.1.17",
     "js-cookie": "^3.0.0",
+    "mocha": "^9.1.0",
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
